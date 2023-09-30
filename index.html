@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Solana Airdrop</title>
+    <!-- <script src = "main.js"></script> -->
+</head>
+
+<body>
+    <form>
+        <label for="inputText">Enter Solana Token:</label>
+        <input type="text" id="inputText" name="inputText">
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js"></script> -->
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+
+    <script> 
+        const { Connection,PublicKey } = solanaWeb3;
+    </script>
+
+    <script>
+        // import { Connection, Keypair } from "@solana/web3.js";
+
+    async function submitForm() {
+    var solanaPublicKey = document.getElementById("inputText").value;
+    const connection = new Connection("https://api.devnet.solana.com");
+    let publicKeyObj = new PublicKey(solanaPublicKey);
+    
+    try {
+        let txhash = await connection.requestAirdrop(publicKeyObj, 1e9);
+            console.log(`txhash: ${txhash}`);
+            alert("Airdrop successful!");
+    } catch (error) {
+        console.error("Airdrop failed:", error);
+        alert("Airdrop failed. Please try again.");
+    }
+    
+        const inputtxt = document.getElementById("inputText").value;
+    alert("You Entered: " + inputtxt);
+}
+    </script>
+
+</body>
+</html>
